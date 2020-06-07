@@ -63,12 +63,12 @@ public class UserServiceTest {
 
     @Test
     public void findAllUsersByFirstName() {
-        when(userRepository.findAll(new Sort(Sort.Direction.ASC, "firstName"))).thenReturn(testUsers);
+        when(userRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"))).thenReturn(testUsers);
         when(userMapper.mapModelsToDTOS(testUsers)).thenReturn(testUserDTOS);
 
         List<UserDTO> returnedUserDTOS = userService.findAllUsersByFirstName();
 
-        verify(userRepository, times(1)).findAll(new Sort(Sort.Direction.ASC, "firstName"));
+        verify(userRepository, times(1)).findAll(Sort.by(Sort.Direction.ASC, "firstName"));
         verify(userMapper, times(1)).mapModelsToDTOS(testUsers);
 
         Assertions.assertEquals(testUserDTOS, returnedUserDTOS);
@@ -76,7 +76,7 @@ public class UserServiceTest {
 
     @Test
     public void findUserByUserId() {
-        when(userRepository.findOne(1)).thenReturn(testUsers.get(1));
+        when(userRepository.findUserById(1)).thenReturn(testUsers.get(1));
         when(userMapper.explicitMapModelToDTO(testUsers.get(1))).thenReturn(testUserDTOS.get(1));
 
         UserDTO returnedUserDTO = userService.findUserByUserId(1);
@@ -86,7 +86,7 @@ public class UserServiceTest {
 
     @Test
     public void findUserByUserId_WhenUserIdNotFound() {
-        when(userRepository.findOne(10)).thenReturn(null);
+        when(userRepository.findUserById(10)).thenReturn(null);
 
         UserDTO nullUserDTO = userService.findUserByUserId(10);
 
@@ -105,7 +105,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteUser() {
-        when(userRepository.findOne(1)).thenReturn(testUsers.get(1));
+        when(userRepository.findUserById(1)).thenReturn(testUsers.get(1));
         when(userMapper.explicitMapModelToDTO(testUsers.get(1))).thenReturn(testUserDTOS.get(1));
 
         UserDTO returnedUserDTO = userService.deleteUserByUserId(1);
@@ -117,7 +117,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteUserByUserId_WhenUserIdNotFound() {
-        when(userRepository.findOne(10)).thenReturn(null);
+        when(userRepository.findUserById(10)).thenReturn(null);
         when(userMapper.explicitMapModelToDTO(null)).thenReturn(null);
 
         UserDTO nullUserDTO = userService.deleteUserByUserId(10);

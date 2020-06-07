@@ -26,11 +26,11 @@ public class UserService {
     }
 
     List<UserDTO> findAllUsersByFirstName() {
-        return userMapper.mapModelsToDTOS(userRepository.findAll(new Sort(Sort.Direction.ASC, "firstName")));
+        return userMapper.mapModelsToDTOS(userRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName")));
     }
 
     UserDTO findUserByUserId(int id) {
-        return userMapper.explicitMapModelToDTO(userRepository.findOne(id));
+        return userMapper.explicitMapModelToDTO(userRepository.findUserById(id));
     }
 
     UserDTO updateUser(User user) {
@@ -46,6 +46,6 @@ public class UserService {
     }
 
     private User findUserByUserIdForDeletion(int id) {
-        return userRepository.findOne(id);
+        return userRepository.findUserById(id);
     }
 }
