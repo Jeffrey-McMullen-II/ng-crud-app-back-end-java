@@ -31,11 +31,11 @@ public class UserServiceTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        testUsers.add(User.builder().id(1).email("test@email.com").firstName("tester").lastName("testing").build());
-        testUsers.add(User.builder().id(2).email("tester@email.com").firstName("testy").lastName("tester").build());
+        testUsers.add(User.builder().userId(1).email("test@email.com").firstName("tester").lastName("testing").build());
+        testUsers.add(User.builder().userId(2).email("tester@email.com").firstName("testy").lastName("tester").build());
 
-        testUserDTOS.add(UserDTO.builder().Id(1).email("test@email.com").firstName("tester").lastName("testing").build());
-        testUserDTOS.add(UserDTO.builder().Id(1).email("testy@email.com").firstName("testy").lastName("tester").build());
+        testUserDTOS.add(UserDTO.builder().userId(1).email("test@email.com").firstName("tester").lastName("testing").build());
+        testUserDTOS.add(UserDTO.builder().userId(1).email("testy@email.com").firstName("testy").lastName("tester").build());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class UserServiceTest {
 
     @Test
     public void findUserByUserId() {
-        when(userRepository.findUserById(1)).thenReturn(testUsers.get(1));
+        when(userRepository.findUserByUserId(1)).thenReturn(testUsers.get(1));
         when(userMapper.explicitMapModelToDTO(testUsers.get(1))).thenReturn(testUserDTOS.get(1));
 
         UserDTO returnedUserDTO = userService.findUserByUserId(1);
@@ -86,7 +86,7 @@ public class UserServiceTest {
 
     @Test
     public void findUserByUserId_WhenUserIdNotFound() {
-        when(userRepository.findUserById(10)).thenReturn(null);
+        when(userRepository.findUserByUserId(10)).thenReturn(null);
 
         UserDTO nullUserDTO = userService.findUserByUserId(10);
 
@@ -105,7 +105,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteUser() {
-        when(userRepository.findUserById(1)).thenReturn(testUsers.get(1));
+        when(userRepository.findUserByUserId(1)).thenReturn(testUsers.get(1));
         when(userMapper.explicitMapModelToDTO(testUsers.get(1))).thenReturn(testUserDTOS.get(1));
 
         UserDTO returnedUserDTO = userService.deleteUserByUserId(1);
@@ -117,7 +117,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteUserByUserId_WhenUserIdNotFound() {
-        when(userRepository.findUserById(10)).thenReturn(null);
+        when(userRepository.findUserByUserId(10)).thenReturn(null);
         when(userMapper.explicitMapModelToDTO(null)).thenReturn(null);
 
         UserDTO nullUserDTO = userService.deleteUserByUserId(10);

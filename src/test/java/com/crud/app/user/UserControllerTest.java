@@ -32,8 +32,8 @@ public class UserControllerTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        testUserDTOS.add(UserDTO.builder().Id(1).email("test@email.com").firstName("tester").lastName("testing").build());
-        testUserDTOS.add(UserDTO.builder().Id(1).email("testy@email.com").firstName("testy").lastName("tester").build());
+        testUserDTOS.add(UserDTO.builder().userId(1).email("test@email.com").firstName("tester").lastName("testing").build());
+        testUserDTOS.add(UserDTO.builder().userId(1).email("testy@email.com").firstName("testy").lastName("tester").build());
         mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService)).build();
     }
 

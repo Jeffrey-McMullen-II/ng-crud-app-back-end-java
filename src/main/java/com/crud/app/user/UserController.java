@@ -28,10 +28,10 @@ public class UserController {
     @GetMapping(path = "/first-name/ascending")
     public ResponseEntity<List<UserDTO>> findAllUsersByFirstName() { return ResponseEntity.ok(userService.findAllUsersByFirstName()); }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<UserDTO> findUserByUserId(@PathVariable("id") Integer id) {
+    @GetMapping(path = "/{userId}")
+    public ResponseEntity<UserDTO> findUserByUserId(@PathVariable("userId") Integer userId) {
 
-        UserDTO userDTO = userService.findUserByUserId(id);
+        UserDTO userDTO = userService.findUserByUserId(userId);
 
         if (userDTO != null) {
             return ResponseEntity.ok(userDTO);
@@ -45,10 +45,10 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(user));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<UserDTO> deleteUserByUserId(@PathVariable("id") Integer id) {
+    @DeleteMapping(path = "/{userId}")
+    public ResponseEntity<UserDTO> deleteUserByUserId(@PathVariable("userId") Integer userId) {
 
-        UserDTO userDTO = userService.deleteUserByUserId(id);
+        UserDTO userDTO = userService.deleteUserByUserId(userId);
 
         if (userDTO != null) {
             return ResponseEntity.ok(userDTO);

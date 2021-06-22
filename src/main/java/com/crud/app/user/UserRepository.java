@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findAll(Sort direction);
 
-    User findUserById(int id);
+    User findUserByUserId(int userId);
 
     void delete(User user);
 }

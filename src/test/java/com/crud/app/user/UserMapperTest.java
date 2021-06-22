@@ -17,7 +17,7 @@ public class UserMapperTest
     @Test
     public void mapModelToDTO() {
         User user = User.builder()
-                .id(1)
+                .userId(1)
                 .email("test@test.com")
                 .firstName("Test")
                 .lastName("Testington")
@@ -25,7 +25,7 @@ public class UserMapperTest
 
         UserDTO userDTO = userMapper.mapModelToDTO(user);
 
-        assertEquals(user.getId(), userDTO.getId());
+        assertEquals(user.getUserId(), userDTO.getUserId());
         assertEquals(user.getFirstName(), userDTO.getFirstName());
         assertEquals(user.getLastName(), userDTO.getLastName());
         assertEquals(user.getEmail(), userDTO.getEmail());

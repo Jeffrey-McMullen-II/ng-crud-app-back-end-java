@@ -11,15 +11,15 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -9020035599331472322L;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userId;
 
     @Column(name = "email")
     private String email;

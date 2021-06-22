@@ -29,23 +29,23 @@ public class UserService {
         return userMapper.mapModelsToDTOS(userRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName")));
     }
 
-    UserDTO findUserByUserId(int id) {
-        return userMapper.explicitMapModelToDTO(userRepository.findUserById(id));
+    UserDTO findUserByUserId(int userId) {
+        return userMapper.explicitMapModelToDTO(userRepository.findUserByUserId(userId));
     }
 
     UserDTO updateUser(User user) {
         return userMapper.explicitMapModelToDTO(userRepository.save(user));
     }
 
-    UserDTO deleteUserByUserId(int id) {
-        User user = findUserByUserIdForDeletion(id);
+    UserDTO deleteUserByUserId(int userId) {
+        User user = findUserByUserIdForDeletion(userId);
         if (user != null) {
             userRepository.delete(user);
         }
         return userMapper.explicitMapModelToDTO(user);
     }
 
-    private User findUserByUserIdForDeletion(int id) {
-        return userRepository.findUserById(id);
+    private User findUserByUserIdForDeletion(int userId) {
+        return userRepository.findUserByUserId(userId);
     }
 }

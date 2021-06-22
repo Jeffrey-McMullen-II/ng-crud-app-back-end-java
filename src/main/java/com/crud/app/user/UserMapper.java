@@ -37,7 +37,7 @@ class UserMapper {
 
         PropertyMap<User, UserDTO> userMap = new PropertyMap<User, UserDTO>() {
             protected void configure() {
-                map().setId(source.getId());
+                map().setUserId(source.getUserId());
                 map().setEmail(source.getEmail());
                 map().setFirstName(source.getFirstName());
                 map().setLastName(source.getLastName());
