@@ -9,27 +9,27 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping()
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
+    ResponseEntity<UserDTO> createUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserDTO>> findAllUsers() { return ResponseEntity.ok(userService.findAllUsers()); }
+    ResponseEntity<List<UserDTO>> findAllUsers() { return ResponseEntity.ok(userService.findAllUsers()); }
 
     @GetMapping(path = "/first-name/ascending")
-    public ResponseEntity<List<UserDTO>> findAllUsersByFirstName() { return ResponseEntity.ok(userService.findAllUsersByFirstName()); }
+    ResponseEntity<List<UserDTO>> findAllUsersByFirstName() { return ResponseEntity.ok(userService.findAllUsersByFirstName()); }
 
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<UserDTO> findUserByUserId(@PathVariable("userId") Integer userId) {
+    ResponseEntity<UserDTO> findUserByUserId(@PathVariable("userId") Integer userId) {
 
         UserDTO userDTO = userService.findUserByUserId(userId);
 
@@ -41,12 +41,12 @@ public class UserController {
     }
 
     @PutMapping()
-    public ResponseEntity<UserDTO> updateUser(@RequestBody User user) {
+    ResponseEntity<UserDTO> updateUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.updateUser(user));
     }
 
     @DeleteMapping(path = "/{userId}")
-    public ResponseEntity<UserDTO> deleteUserByUserId(@PathVariable("userId") Integer userId) {
+    ResponseEntity<UserDTO> deleteUserByUserId(@PathVariable("userId") Integer userId) {
 
         UserDTO userDTO = userService.deleteUserByUserId(userId);
 
